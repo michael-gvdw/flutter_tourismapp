@@ -16,13 +16,19 @@ class Locations extends StatelessWidget {
       appBar: AppBar(
         title: Text('Locations'),
       ),
-      body: ListView(
-        children: locations
-            .map((location) => GestureDetector(
-                  child: Text(location.name),
-                  onTap: () => _onLocationTap(context, location.id),
-                ))
-            .toList(),
+      body: ListView.separated(
+        itemCount: locations.length,
+        itemBuilder: (context, index) => GestureDetector(
+          child: ListTile(
+            leading: Icon(Icons.place),
+            title: Text(locations[index].name),
+            trailing: Icon(Icons.keyboard_arrow_right),
+          ),
+          onTap: () => _onLocationTap(context, locations[index].id),
+        ),
+        separatorBuilder: (context, index) => Divider(
+          thickness: 2,
+        ),
       ),
     );
   }
